@@ -3,14 +3,14 @@
 #define SIZE 5
 
 typedef char *ElemArray, ElemType;
-typedef struct stackType{
-	
+typedef struct stackType {
+
 	ElemArray E;
 	int top;
-	
+
 }*Stack;
 
-typedef enum{FALSE, TRUE} Bool;
+typedef enum {FALSE, TRUE} Bool;
 
 void initializeStack(Stack *S);
 Bool isFull(Stack S);
@@ -19,62 +19,64 @@ ElemType top(Stack S);
 void push(Stack *S, char data);
 void pop(Stack *S);
 
-int main(){
-	
+int main() {
+
 	Stack S;
 	initializeStack(&S);
 	printf("Is the Stack empty?\n");
-	if(isEmpty(S)){
+	if(isEmpty(S)) {
 		printf("The Stack is currently empty\n");
-	}else{
+	} else {
 		printf("The Stack is not empty\n");
 	}
 	printf("Is the Stack full?\n");
-	if(isFull(S)){
+	if(isFull(S)) {
 		printf("The Stack is currently full!\n");
-	}else{
+	} else {
 		printf("The Stack is not full!\n");
 	}
+	printf("\n------------------------\n");
 	push(&S, 'b');
 	push(&S, 'a');
 	push(&S, 'c');
-	if(isEmpty(S) == TRUE){
+	printf("Elements have been added\n\n");
+	if(isEmpty(S)) {
 		printf("The Stack is currently empty\n");
-	}else{
-		printf("The Stick is not empty\n");
+	} else {
+		printf("The Stack is not empty\n");
 	}
 	printf("The current top element is: %c\n", top(S));
 	pop(&S);
 	printf("The current top element is: %c\n", top(S));
 }
 
-void initializeStack(Stack *S){
+void initializeStack(Stack *S) {
 	(*S) = (Stack)malloc(sizeof(Stack));
 	(*S)->E = (ElemType*)malloc(sizeof(ElemType)*SIZE);
 	(*S)->top = SIZE;
 }
 
-Bool isFull(Stack S){
+Bool isFull(Stack S) {
 	return (S->top == 0) ? TRUE : FALSE;
 }
 
-Bool isEmpty(Stack S){
+Bool isEmpty(Stack S) {
 	return (S->top == SIZE) ? TRUE : FALSE;
 }
 
-ElemType top(Stack S){
+ElemType top(Stack S) {
 	return (isEmpty(S) == FALSE) ? S->E[S->top] : '!';
 }
 
-void push(Stack *S, char data){
-	if(isFull(*S) == FALSE){
+void push(Stack *S, char data) {
+	if(isFull(*S) == FALSE) {
 		(*S)->top--;
 		(*S)->E[(*S)->top] = data;
 	}
 }
 
-void pop(Stack *S){
-	if(isEmpty(*S) == FALSE){
+void pop(Stack *S) {
+	if(isEmpty(*S) == FALSE) {
 		(*S)->top++;
 	}
 }
