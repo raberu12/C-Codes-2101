@@ -5,8 +5,9 @@
 
 typedef int SET;
 
-SET Union(SET *A, SET *B);
 void initSet(SET *A);
+SET Union(SET *A, SET *B);
+
 
 int main() {
 
