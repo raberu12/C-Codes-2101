@@ -28,11 +28,13 @@ int main() {
 	addElem(A, 3);
 	addElem(A, 4);
 	addElem(A, 7);
+	addElem(A, 6);
 	
 	addElem(B, 1);
 	addElem(B, 2);
 	addElem(B, 4);
 	addElem(B, 7);
+	addElem(B, 5);
 	
 	C = Union(A, B);
 	D = Intersection(A, B);
