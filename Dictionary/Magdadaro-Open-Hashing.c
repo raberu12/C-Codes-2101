@@ -29,7 +29,7 @@ void initDictionary(Dictionary *D);
 int hash(unsigned int x);
 void insert(Dictionary D, Student S);
 Boolean isMember(Dictionary D, unsigned int x);
-void delete(Dictionary D, unsigned int x);
+void Delete(Dictionary D, unsigned int x);
 Student search(Dictionary D, unsigned int x);
 void display(Dictionary D);
 
@@ -41,6 +41,8 @@ int main() {
 	initDictionary(&D);
 	insert(D, s1);
 	insert(D, s2);
+	
+	
 	if(isMember(D, 11400071)) {
 		printf("true\n");
 	} else {
@@ -51,9 +53,11 @@ int main() {
 	} else {
 		printf("false\n");
 	}
+	
+	
 	Student match = search(D, 11400071);
 	printf("--------------\nSEARCHED STUDENT:\nID: %d\nName: %s %s, %c\nYear Level: %d\n--------------\n", match.idNum, match.FN, match.LN, match.MI, match.yearLevel);
-	delete(D, 11400071);
+	Delete(D, 11400071);
 	display(D);
 }
 
@@ -92,11 +96,14 @@ Boolean isMember(Dictionary D, unsigned int x) {
 	return trav == NULL ? FALSE : TRUE;
 
 }
-void delete(Dictionary D, unsigned int x) {
+void Delete(Dictionary D, unsigned int x) {
+	NodePtr temp;
 	int hashval = hash(x);
-	NodePtr trav;
-	for(trav = D[hashval]; trav !=NULL && trav->data.idNum != x; trav = trav->next) {}
-	free(trav);
+	NodePtr *trav;
+	for(trav = &D[hashval]; *trav != NULL && (*trav)->data.idNum != x; trav = &(*trav)->next) {}
+	temp = *trav;
+	*trav = (*trav)->next;
+	free(temp);
 }
 
 Student search(Dictionary D, unsigned int x) {
