@@ -34,15 +34,18 @@ Student search(Dictionary D, unsigned int x);
 void display(Dictionary D);
 
 int main() {
-
-	Student s1 = {11400071, "Matt", "Magdadaro", 'E', 2};
+	
+	//initial declarations
+	Student s1 = {11400071, "Matt", "Magdadaro", 'E', 2}; 
 	Student s2 = {22101281, "Sky", "Sayson", 'C', 2};
 	Dictionary D;
 	initDictionary(&D);
+	
+	//insertin into the dictionary
 	insert(D, s1);
 	insert(D, s2);
 	
-	
+	//check if member
 	if(isMember(D, 11400071)) {
 		printf("true\n");
 	} else {
@@ -54,7 +57,7 @@ int main() {
 		printf("false\n");
 	}
 	
-	
+	//displaying and searching
 	Student match = search(D, 11400071);
 	printf("--------------\nSEARCHED STUDENT:\nID: %d\nName: %s %s, %c\nYear Level: %d\n--------------\n", match.idNum, match.FN, match.LN, match.MI, match.yearLevel);
 	Delete(D, 11400071);
