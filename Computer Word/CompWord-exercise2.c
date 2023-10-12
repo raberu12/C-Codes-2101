@@ -105,7 +105,7 @@ void displaySet(SET A) {
 }
 
 void Insert(SET *A, SET elem) {
-	if(elem > 7) {
+	if(elem > sizeof(SET)*8-1) {
 		printf("Out of Range\n\n");
 	} else {
 		printf("Position #%d has been added!\n\n", elem);
