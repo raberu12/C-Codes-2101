@@ -10,6 +10,8 @@ struct node { //def of a binary tree
 
 struct node* newNode(int data);
 void printInorder(struct node* node);
+void printPreorder(struct node* node);
+void printPostorder(struct node* node);
 
 int main() {
 	struct node* root = newNode(1);
@@ -20,7 +22,7 @@ int main() {
 	root->right->right = newNode(6);
 	
 	printf("Inorder Traversal of binary tree is \n");
-	printInorder(root);
+	printPreorder(root);
 	return 0;
 
 }
@@ -39,6 +41,26 @@ void printInorder(struct node* node) {
 		printInorder(node->left);
 		printf("%d ", node->data);
 		printInorder(node->right);
+	} else {
+		return;
+	}
+}
+
+void printPreorder(struct node* node) {
+	if (node != NULL) {
+		printf("%d ", node->data);
+		printInorder(node->left);
+		printInorder(node->right);
+	} else {
+		return;
+	}
+}
+
+void printPostorder(struct node* node) {
+	if (node != NULL) {
+		printInorder(node->left);
+		printInorder(node->right);
+		printf("%d ", node->data);
 	} else {
 		return;
 	}
