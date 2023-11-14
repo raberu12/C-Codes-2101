@@ -18,7 +18,7 @@ int main() {
 
 	tree root = NULL;
 
-	root = insert(root, 5);
+	insert(root, 5);
 
 	insert(root, 3);
 	insert(root, 2);

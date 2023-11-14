@@ -17,7 +17,8 @@ int main() {
 
 	tree root = NULL;
 
-	insert(root, 5);
+	root = insert(root, 5);
+
 	insert(root, 3);
 	insert(root, 4);
 	insert(root, 6);
@@ -42,22 +43,26 @@ tree newNode(int key) {
 tree insert(tree node, int key) {
 
 	if(node == NULL) {
-		return node(key);
+		return newNode(key);
 	}
 	if(key < node->key) {
-		node->left = insert(node, key);
+		node->left = insert(node->left, key);
 	} else if(key > node->key) {
-		node->right = insert(node, key);
+		node->right = insert(node->right, key);
 	}
-
 	return node;
+}
 
-	void printInorder(tree node) {
 
-		printInorder(tree->left);
-		printf("%d ", tree->key);
-		printInorder(tree->right);
 
+void printInorder(tree node) {
+
+	if (node != NULL) {
+		printInorder(node->left);
+		printf("%d ", node->key);
+		printInorder(node->right);
 	}
+
+}
 
 
