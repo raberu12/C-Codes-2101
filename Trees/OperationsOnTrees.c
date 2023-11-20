@@ -8,23 +8,32 @@ typedef struct node {
 	struct node *left; 
 	struct node *right;
 
-} Node;
+}Node;
 
 Node* newNode(int key);
 Node* insert(Node *node, int key);
 void search(Node *node, int key);
+Node *findMin(Node *node);
 Node* Delete(Node *node, int key);
 void printInorder(Node *node);
+
 
 int main() {
 	
 	Node *root = NULL;
-	root = insert(root, 50);
+	root = insert(root, 10);
 
-	insert(root, 30);
+	insert(root, 8);
+	insert(root, 4);
+	insert(root, 9);
+	insert(root, 14);
 	insert(root, 20);
-	insert(root, 70);
-	insert(root, 60);
+	insert(root, 13);
+	insert(root, 17);
+	insert(root, 25);
+	insert(root, 30);
+	insert(root, 16);
+	insert(root, 21);
 	
 
 	
@@ -33,12 +42,12 @@ int main() {
 	printInorder(root);
 	printf("\n");
 
-	Delete(root, 70);
+	Delete(root, 30);
 
 	printf("After deletion: \n");
 	printInorder(root);
 	
-	search(root, 20);
+	search(root, 60);
 
 	return 0;
 }
@@ -94,6 +103,14 @@ void search(Node *node, int key) {
 
 }
 
+//helper function for deletion, finds the node with the smallest value
+Node *findMin(Node *node){
+	while(node->left != NULL){
+		node = node->left;
+	}
+	return node;
+}
+
 Node* Delete(Node *node, int key) {
 
 	//Base case: If NODE is null then return
@@ -115,7 +132,7 @@ Node* Delete(Node *node, int key) {
 	if(node->left == NULL) {
 		Node *temp = node->right;
 		free(node);
-		return node;
+		return temp;
 	} else if(node->right == NULL) {
 		Node *temp = node->left;
 		free(node);
@@ -123,20 +140,10 @@ Node* Delete(Node *node, int key) {
 		
 	//If both children are present case
 	} else {
-		Node *nextParent = node;
-		Node *successor = node->right;
-		while(successor->left != NULL){
-			nextParent = successor;
-			successor = successor->left;
-		}
-		if(successor != node){
-			nextParent->left = successor->right;
-		}else{
-			nextParent->right = successor->right;
-		}
-		node->data = successor->data;
-		free(successor);
-		return node;
+		Node *temp = findMin(node->right);
+		node->data = temp->data;
+		node->right = Delete(node->right, temp->data);
+		
 	}
-
+	return node;
 }
